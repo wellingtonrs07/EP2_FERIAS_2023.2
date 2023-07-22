@@ -1,3 +1,5 @@
+#QUESTAO 1
+
 def transforma_base(lista_questoes):
     dicio_retorno = {}
 
@@ -12,23 +14,70 @@ def transforma_base(lista_questoes):
     
     return dicio_retorno
 
-print(transforma_base([
-  {
-    'titulo': 'Qual o resultado da operação 57 + 32?',
-    'nivel': 'facil',
-    'opcoes': {'A': '-19', 'B': '85', 'C': '89', 'D': '99'},
-    'correta': 'C'
-  },
-  {
-    'titulo': 'Qual a capital do Brasil?',
-    'nivel': 'facil',
-    'opcoes': {'A': 'Brasília', 'B': 'Rio de janeiro', 'C': 'São Paulo', 'D': 'Osasco'},
-    'correta': 'A'
-  },
-  {
-    'titulo': 'Quem é considerada a primeira pessoa programadora do mundo?!',
-    'nivel': 'medio',
-    'opcoes': {'A': 'Marie Curie', 'B': 'Alan Turing', 'C': 'Ada Lovelace', 'D': 'Edsger Dijkstra'},
-    'correta': 'C'
-  }
-]))
+# QUESTAO 2
+def valida_questao(questao):
+    retorno = {}
+
+    #verificar a quantidade de chaves
+    qnt_chaves = len(questao.keys())
+
+    if qnt_chaves != 4:
+        retorno['outro'] = 'numero_chaves_invalido'
+    
+
+    #caso para o titulo inexistente
+    if 'titulo' not in questao:
+        retorno['titulo'] = 'nao_encontrado'
+    
+    else:
+        #caso titulo existente, porem vazio
+        if questao['titulo'] == "_________" or questao['titulo'] == '' or '\t' in questao['titulo'] or questao['titulo'] == ' ':
+        
+            retorno['titulo'] = 'vazio'
+
+    #verificacao do nivel
+    if 'nivel' in questao:
+        if questao['nivel'] != 'facil' and questao['nivel'] != 'medio' and questao['nivel'] != 'dificil':
+            retorno['nivel'] = 'valor_errado'
+        
+    else:
+        retorno['nivel'] = 'nao_encontrado'
+    
+    #verificacao de opções
+    if 'opcoes' in questao:
+        qnt_opcoes = len(questao['opcoes'].keys())
+
+        if qnt_opcoes != 4: 
+            retorno['opcoes'] = 'tamanho_invalido'
+
+        #verificando se há 4 respostas
+        elif 'A' not in questao['opcoes'] or 'B' not in questao['opcoes'] or 'C' not in questao['opcoes'] or 'D' not in questao['opcoes']:
+            retorno['opcoes'] = 'chave_invalida_ou_nao_encontrada'
+           
+
+        else:
+             #verificando se há resp vazias
+            for alternativa, respostas in questao['opcoes'].items():
+                if respostas == '' or '\t' in respostas or respostas == ' ':
+                    questao['opcoes'][alternativa] = 'vazia'
+
+                    if 'opcoes' not in retorno:
+                        retorno['opcoes'] = {alternativa: questao['opcoes'][alternativa]}
+                    
+                    else:
+                        retorno['opcoes'][alternativa] = questao['opcoes'][alternativa]
+
+    else:
+        retorno['opcoes'] = 'nao_encontrado'
+    
+    #verificando o gabarito
+    if 'correta' in questao:
+        if questao['correta'] != 'A' and questao['correta'] != 'B' and questao['correta'] != 'C' and questao['correta'] != 'D':
+           retorno['correta'] = 'valor_errado'
+    
+    else:
+        retorno['correta'] = 'nao_encontrado'
+    
+    return retorno
+
+print(valida_questao({'titulo': 'Quem é Oxóssi?!', 'opcoes': {'A': ' \t', 'B': ' ', 'C': ' \t\t', 'D': ' \t\t'}}))
