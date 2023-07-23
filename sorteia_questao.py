@@ -1,3 +1,4 @@
+import random as rd
 questoes = {
   "facil": [
     {
@@ -107,4 +108,9 @@ questoes = {
 }
 nivel = 'facil'
 def sorteia_questao(questoes,nivel):
-    a = 0
+    perguntas_do_nivel = questoes[nivel]
+    pergunta = rd.choice(perguntas_do_nivel)
+    return pergunta
+                
+
+print(sorteia_questao(questoes,nivel))
