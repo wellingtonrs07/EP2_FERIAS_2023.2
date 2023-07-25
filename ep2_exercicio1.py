@@ -200,13 +200,16 @@ questao = {
 }
 id = 17
 def questao_para_texto(questao, id):
-    titulo = questao['titulo']  # Obtém o título da questão do dicionário
-    l = []
-    for k,v in questao['opcoes'].items():
-        respostas = str(k) + ': ' + str(v)
-        l.append(respostas)  # Adiciona as alternativas à lista 'l'
-    # Retorna uma string formatada com o número da questão, o título e as opções de resposta
-    return(f'----------------------------------------\nQUESTAO {id}\n{titulo}\nRESPOSTAS:\n{l[0]}\n{l[1]}\n{l[2]}\n{l[3]}')
+    # Montar a string formatada da questão
+    final = f"----------------------------------------\nQUESTAO {id}\n\n{questao['titulo']}\n\nRESPOSTAS:\n"
+    
+    # Obter a lista de opções e a opção correta
+    opcoes = questao['opcoes']
+    # Adicionar as opções formatadas à string
+    for letra, opcao in opcoes.items():
+        final += f"{letra}: {opcao}\n"
+    # Retornar a string formatada
+    return final
 
 print(questao_para_texto(questao,id))
 
@@ -223,7 +226,6 @@ questao = {
   },
   "correta": "D"
 }
-import random as rd
 import random as rd
 
 def gera_ajuda(questao):
@@ -245,5 +247,5 @@ def gera_ajuda(questao):
         l.remove(x)  # Remove a opção escolhida para não ser selecionada novamente
         y = rd.choice(l)  # Escolhe outra opção errada da lista 'l'
         return f"DICA:\nOpções certamente erradas: {x} | {y}"
-print(gera_ajuda(questao))
+
 
