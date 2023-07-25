@@ -174,16 +174,17 @@ def sorteia_questao(questoes, nivel):
 #QUESTÃO 5
 import random as rd
 def sorteia_questao_inedita(questoes,nivel,sorteadas):
-    novas_sorteadas = sorteadas
+    novas_sorteadas = sorteadas   # Faz uma cópia da lista 'sorteadas'
     lista_nivel = []
+    # Percorre as questões do nível especificado (nivel) no dicionário 'questoes'
     for dif, questao in questoes.items():
         if dif == nivel:
             for elemento in questao:
-                lista_nivel.append(elemento)
-    sorteada = rd.choice(lista_nivel)
-    if sorteada not in novas_sorteadas:
-        novas_sorteadas.append(sorteada)
-    return sorteada
+                lista_nivel.append(elemento) # Adiciona as questões do nível à lista 'lista_nivel'
+    sorteada = rd.choice(lista_nivel)  # Escolhe aleatoriamente uma questão do nível da lista 'lista_nivel'
+    if sorteada not in novas_sorteadas:  # Verifica se a questão sorteada não está na lista de questões já sorteadas
+        novas_sorteadas.append(sorteada)  # Se não estiver, adiciona a questão sorteada à lista de questões sorteadas
+    return sorteada # Retorna a questão sorteada (ou None se todas as questões já foram sorteadas anteriormente)
 
 #Questao 6
 questao = {
@@ -199,11 +200,12 @@ questao = {
 }
 id = 17
 def questao_para_texto(questao, id):
-    titulo = questao['titulo']
+    titulo = questao['titulo']  # Obtém o título da questão do dicionário
     l = []
     for k,v in questao['opcoes'].items():
         respostas = str(k) + ': ' + str(v)
-        l.append(respostas.strip())
+        l.append(respostas)  # Adiciona as alternativas à lista 'l'
+    # Retorna uma string formatada com o número da questão, o título e as opções de resposta
     return(f'----------------------------------------\nQUESTAO {id}\n{titulo}\nRESPOSTAS:\n{l[0]}\n{l[1]}\n{l[2]}\n{l[3]}')
 
 print(questao_para_texto(questao,id))
@@ -222,20 +224,26 @@ questao = {
   "correta": "D"
 }
 import random as rd
+import random as rd
+
 def gera_ajuda(questao):
     l = []
     opcoes = questao['opcoes']
-    for k,v in opcoes.items():
+
+    # Percorre todas as opções do dicionário 'opcoes'
+    for k, v in opcoes.items():
         if k != questao['correta']:
-            l.append(v)
-    qtd = rd.randint(1,2)
+            l.append(v)  # Adiciona as opções erradas à lista 'l'
+
+    qtd = rd.randint(1, 2)  # Gera um número aleatório entre 1 e 2
+
     if qtd == 1:
-        x = rd.choice(l)
-        return (f"DICA:\nOpções certamente erradas: {x}")
+        x = rd.choice(l)  # Escolhe aleatoriamente uma opção errada da lista 'l'
+        return f"DICA:\nOpções certamente erradas: {x}"
     elif qtd == 2:
-        x = rd.choice(l)
-        l.remove(x)
-        y = rd.choice(l)
-        return (f"DICA:\nOpções certamente erradas: {x} | {y}")
+        x = rd.choice(l)  # Escolhe aleatoriamente uma opção errada da lista 'l'
+        l.remove(x)  # Remove a opção escolhida para não ser selecionada novamente
+        y = rd.choice(l)  # Escolhe outra opção errada da lista 'l'
+        return f"DICA:\nOpções certamente erradas: {x} | {y}"
 print(gera_ajuda(questao))
 
