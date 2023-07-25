@@ -31,7 +31,7 @@ def valida_questao(questao):
     
     else:
         #caso titulo existente, porem vazio
-        if questao['titulo'] == "_________" or questao['titulo'] == '' or '\t' in questao['titulo'] or questao['titulo'] == ' ':
+        if questao['titulo'].strip() == '':
         
             retorno['titulo'] = 'vazio'
 
@@ -58,7 +58,7 @@ def valida_questao(questao):
         else:
              #verificando se há resp vazias
             for alternativa, respostas in questao['opcoes'].items():
-                if respostas == '' or '\t' in respostas or respostas == ' ':
+                if respostas.strip() == '':
                     questao['opcoes'][alternativa] = 'vazia'
 
                     if 'opcoes' not in retorno:
@@ -101,7 +101,7 @@ def valida_questoes(lista_questoes):
         
         else:
             #caso titulo existente, porem vazio
-            if questao['titulo'] == "_________" or questao['titulo'] == '' or '\t' in questao['titulo'] or questao['titulo'] == ' ':
+            if questao['titulo'].strip() == '':
             
                 retorno['titulo'] = 'vazio'
 
@@ -128,7 +128,7 @@ def valida_questoes(lista_questoes):
             else:
                 #verificando se há resp vazias
                 for alternativa, respostas in questao['opcoes'].items():
-                    if respostas == '' or '\t' in respostas or respostas == ' ':
+                    if respostas.strip() == '':
                         questao['opcoes'][alternativa] = 'vazia'
 
                         if 'opcoes' not in retorno:
@@ -150,25 +150,6 @@ def valida_questoes(lista_questoes):
         
         lista_retorno.append(retorno)
     
-    return retorno
+    return lista_retorno
 
-print(valida_questoes([
-  {
-    'titulo': 'Qual o resultado da operação 57 + 32?',
-    'nivel': 'facil',
-    'opcoes': {'A': '-19', 'B': '85', 'C': '89', 'D': '99'},
-    'correta': 'C'
-  },
-  {
-    'titulo': 'Qual a capital do Brasil?',
-    'nivel': 'facil',
-    'opcoes': {'A': 'Brasília', 'B': 'Rio de janeiro', 'C': 'São Paulo', 'D': 'Osasco'},
-    'correta': 'A'
-  },
-  {
-    'titulo': 'Quem é considerada a primeira pessoa programadora do mundo?!',
-    'nivel': 'medio',
-    'opcoes': {'A': 'Marie Curie', 'B': 'Alan Turing', 'C': 'Ada Lovelace', 'D': 'Edsger Dijkstra'},
-    'correta': 'C'
-  }
-]))
+print(valida_questao({'titulo': 'Dentre os listados, qual destes esportes é menos praticado no Brasil?', 'nivel': 'facil', 'opcoes': {'A': ' ', 'B': ' \t', 'C': 'Ski Cross Country', 'D': ' \t\t'}, 'correta': 'C'}))
