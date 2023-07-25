@@ -184,3 +184,19 @@ def sorteia_questao_inedita(questoes,nivel,sorteadas):
     if sorteada not in novas_sorteadas:
         novas_sorteadas.append(sorteada)
     return sorteada
+
+#Questao 6
+questao = {
+  "titulo": "Qual destes parques não se localiza em São Paulo?!",
+  "nivel": "facil",
+  "opcoes": {
+    "A": "Ibirapuera",
+    "B": "Parque do Carmo",
+    "C": "Parque Villa Lobos",
+    "D": "Morro da Urca"
+  },
+  "correta": "D"
+}
+id = 5
+def questao_para_texto(questao, id):
+
