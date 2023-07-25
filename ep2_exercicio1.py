@@ -209,5 +209,33 @@ def questao_para_texto(questao, id):
 print(questao_para_texto(questao,id))
 
 #Questao 7
-def gera_ajuda():
-    a 
+import random as rd
+questao = {
+  "titulo": "Qual destes parques não se localiza em São Paulo?!",
+  "nivel": "facil",
+  "opcoes": {
+    "A": "Ibirapuera",
+    "B": "Parque do Carmo",
+    "C": "Parque Villa Lobos",
+    "D": "Morro da Urca"
+  },
+  "correta": "D"
+}
+import random as rd
+def gera_ajuda(questao):
+    l = []
+    opcoes = questao['opcoes']
+    for k,v in opcoes.items():
+        if k != questao['correta']:
+            l.append(v)
+    qtd = rd.randint(1,2)
+    if qtd == 1:
+        x = rd.choice(l)
+        return (f"DICA:\nOpções certamente erradas: {x}")
+    elif qtd == 2:
+        x = rd.choice(l)
+        l.remove(x)
+        y = rd.choice(l)
+        return (f"DICA:\nOpções certamente erradas: {x} | {y}")
+print(gera_ajuda(questao))
+
