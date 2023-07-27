@@ -372,7 +372,6 @@ def questao_para_texto(questao, id):
     # Retornar a string formatada
     return final
 
-
 #Questao 7
 import random as rd
 questao = {
@@ -422,253 +421,107 @@ def junta_game(banco_questoes):
     sorteadas = []
     jogando = True
     a = 1
-    pulo = 0
+    pulou = 0
     acertou = 'Você acertou! Seu prêmio atual é de R$'
-    opcoes = ['A','B','C','D','ajuda','pular','parar']
+    opcoes = ['A','B','C','D']
     valores =[1000,5000,10000,30000,50000,100000,300000,500000,1000000]
-    niveis = ['facil','medio','dificil']
+    niveis = {1:'facil', 2:'facil',3:'facil',4:'medio', 5:'medio', 6:'medio', 7:'dificil', 8:'dificil', 9:'dificil'}
+    ajudou = 0
+
     print(f'Ok {str(nome_jogador.upper())}, você tem direito a pular 3 vezes e 2 ajudas!\nAs opções de resposta são "A", "B", "C", "D", "ajuda", "pula" e "parar"! ')
-    while jogando == True:                           
-        while a <= len(valores):   
-            if jogando == False:
-                break
-            print(f'O jogo já vai começar! Lá vem a questão n°{a}!')
-            if a == 1:                                                               
-                print(f'Vamos começar com questões do nível {niveis[0]}!') 
-                questao_sorteada = sorteia_questao(questoes,niveis[0])
-                print(questao_para_texto(questao_sorteada,a))
-                sorteadas.append(questao_sorteada)
-                resposta = input('Qual a sua resposta?! ')
-                if resposta == 'pula':
-                    if pulo < 3:
-                        questao_sorteada = sorteia_questao_inedita(questoes,niveis[0],sorteadas)
-                        print(questao_para_texto(questao_sorteada,a))
-                        resposta = input('Qual a sua resposta?! ')
-                        if resposta == questao_sorteada['correta']:
-                            print(acertou + str(dinheiro))  
-                            dinheiro = valores[a]    
-                            a += 1
-                    else:
-                        print('Não deu! Você não tem mais direito a pulos!')
-                        resposta = input('Qual a sua resposta?! ')
-                elif resposta == questao_sorteada['correta']:
-                    dinheiro = valores[a]
-                    print(acertou + str(dinheiro))    
-                    a += 1
-                elif resposta == 'ajuda':
-                    print(gera_ajuda(questao_sorteada))
-                    resposta = input('Qual a sua resposta?! ')
-                    if resposta == questao_sorteada['correta']:
-                        print(acertou + str(dinheiro))  
-                        dinheiro = valores[a]    
-                        a += 1
-                elif resposta == 'parar' or resposta in opcoes and resposta != questao_sorteada['correta']:
-                    print('O jogo acabou!')
-                    jogando = False
-                    break
-                elif resposta not in opcoes:
-                    print('Opção inválida!\nAs opções de resposta são "A", "B", "C", "D", "ajuda", "pula" e "parar"!')
-                    resposta = input('Qual a sua resposta?! ')
-                    if resposta == questao_sorteada['correta']:
-                        dinheiro = valores[a]
-                        print(acertou + str(dinheiro))      
-                        a += 1
-            elif a <= 3:
-                questao_sorteada = sorteia_questao_inedita(questoes,niveis[0],sorteadas)
-                print(questao_para_texto(questao_sorteada,a))
-                sorteadas.append(questao_sorteada)
-                resposta = input('Qual a sua resposta?! ')
-                if resposta == 'pular':
-                    if pulo < 3:
-                        questao_sorteada = sorteia_questao_inedita(questoes,niveis[0],sorteadas)
-                        print(questao_para_texto(questao_sorteada,a))
-                        resposta = input('Qual a sua resposta?! ')
-                        if resposta == questao_sorteada['correta']:
-                            dinheiro = valores[a]
-                            print(acertou + str(dinheiro))      
-                            a += 1
-                    else:
-                        print('Não deu! Você não tem mais direito a pulos!')
-                        resposta = input('Qual a sua resposta?! ')
-                elif resposta == questao_sorteada['correta']:
-                    dinheiro == valores[a]    
-                    print(acertou + str(dinheiro))  
-                    a += 1
-                elif resposta == 'ajuda':
-                    print(gera_ajuda(questao_sorteada))
-                    resposta = input('Qual a sua resposta?! ')
-                    if resposta == questao_sorteada['correta']:
-                        dinheiro = valores[a] 
-                        print(acertou + str(dinheiro))     
-                        a += 1
-                elif resposta == 'parar' or resposta in opcoes and resposta != questao_sorteada['correta']:
-                    print('O jogo acabou!')
-                    break
-                elif resposta not in opcoes:
-                    print('Opção inválida!\nAs opções de resposta são "A", "B", "C", "D", "ajuda", "pula" e "parar"!')
-                    resposta = input('Qual a sua resposta?! ')
-                    if resposta == questao_sorteada['correta']:
-                        dinheiro = valores[a]  
-                        print(acertou + str(dinheiro))    
-                        a += 1
-            if a == 4:                                                               
-                print(f'Vamos começar com questões do nível {niveis[1]}!') 
-                questao_sorteada = sorteia_questao(questoes,niveis[1])
-                print(questao_para_texto(questao_sorteada,a))
-                sorteadas.append(questao_sorteada)
-                resposta = input('Qual a sua resposta?! ')
-                if resposta == 'pular':
-                    if pulo < 3:
-                        questao_sorteada = sorteia_questao_inedita(questoes,niveis[1],sorteadas)
-                        print(questao_para_texto(questao_sorteada,a))
-                        resposta = input('Qual a sua resposta?! ')
-                        if resposta == questao_sorteada['correta']:
-                            dinheiro = valores[a]   
-                            print(acertou + str(dinheiro))   
-                            a += 1
-                    else:
-                        print('Não deu! Você não tem mais direito a pulos!')
-                        resposta = input('Qual a sua resposta?! ')
-                elif resposta == questao_sorteada['correta']:
-                    dinheiro = valores[a]    
-                    print(acertou + str(dinheiro))  
-                    a += 1
-                elif resposta == 'ajuda':
-                    print(gera_ajuda(questao_sorteada))
-                    resposta = input('Qual a sua resposta?! ')
-                    if resposta == questao_sorteada['correta']:
-                        dinheiro = valores[a] 
-                        print(acertou + str(dinheiro))     
-                        a += 1
-                elif resposta == 'parar' or resposta in opcoes and resposta != questao_sorteada['correta']:
-                    print('O jogo acabou!')
-                    break
-                elif resposta not in opcoes:
-                    print('Opção inválida!\nAs opções de resposta são "A", "B", "C", "D", "ajuda", "pula" e "parar"!')
-                    resposta = input('Qual a sua resposta?! ')
-                    if resposta == questao_sorteada['correta']:
-                        dinheiro = valores[a]
-                        print(acertou + str(dinheiro))      
-                        a += 1
-            elif a <= 6:
-                questao_sorteada = sorteia_questao_inedita(questoes,niveis[0],sorteadas)
-                print(questao_para_texto(questao_sorteada,a))
-                sorteadas.append(questao_sorteada)
-                resposta = input('Qual a sua resposta?! ')
-                if resposta == 'pular':
-                    if pulo < 3:
-                        questao_sorteada = sorteia_questao_inedita(questoes,niveis[0],sorteadas)
-                        print(questao_para_texto(questao_sorteada,a))
-                        resposta = input('Qual a sua resposta?! ')
-                        if resposta == questao_sorteada['correta']:
-                            dinheiro = valores[a]    
-                            print(acertou + str(dinheiro))  
-                            a += 1
-                    else:
-                        print('Não deu! Você não tem mais direito a pulos!')
-                        resposta = input('Qual a sua resposta?! ')
-                elif resposta == questao_sorteada['correta']:
-                    dinheiro = valores[a]    
-                    print(acertou + str(dinheiro))  
-                    a += 1
-                elif resposta == 'ajuda':
-                    print(gera_ajuda(questao_sorteada))
-                    resposta = input('Qual a sua resposta?! ')
-                    if resposta == questao_sorteada['correta']:
-                        dinheiro = valores[a] 
-                        print(acertou + str(dinheiro))     
-                        a += 1
-                elif resposta == 'parar' or resposta in opcoes and resposta != questao_sorteada['correta']:
-                    print('O jogo acabou!')
-                    break
-                elif resposta not in opcoes:
-                    print('Opção inválida!\nAs opções de resposta são "A", "B", "C", "D", "ajuda", "pula" e "parar"!')
-                    resposta = input('Qual a sua resposta?! ')
-                    if resposta == questao_sorteada['correta']:
-                        dinheiro = valores[a]   
-                        print(acertou + str(dinheiro))   
-                        a += 1
-            if a == 7:                                                               
-                print(f'Vamos começar com questões do nível {niveis[2]}!') 
-                questao_sorteada = sorteia_questao(questoes,niveis[2])
-                print(questao_para_texto(questao_sorteada,a))
-                sorteadas.append(questao_sorteada)
-                resposta = input('Qual a sua resposta?! ')
-                if resposta == 'pular':
-                    if pulo < 3:
-                        questao_sorteada = sorteia_questao_inedita(questoes,niveis[2],sorteadas)
-                        print(questao_para_texto(questao_sorteada,a))
-                        resposta = input('Qual a sua resposta?! ')
-                        if resposta == questao_sorteada['correta']:
-                            dinheiro = valores[a]   
-                            print(acertou + str(dinheiro))   
-                            a += 1
-                    else:
-                        print('Não deu! Você não tem mais direito a pulos!')
-                        resposta = input('Qual a sua resposta?! ')
-                elif resposta == questao_sorteada['correta']:
-                    dinheiro = valores[a]    
-                    print(acertou + str(dinheiro))  
-                    a += 1
-                elif resposta == 'ajuda':
-                    print(gera_ajuda(questao_sorteada))
-                    resposta = input('Qual a sua resposta?! ')
-                    if resposta == questao_sorteada['correta']:
-                        dinheiro = valores[a] 
-                        print(acertou + str(dinheiro))     
-                        a += 1
-                elif resposta == 'parar' or resposta in opcoes and resposta != questao_sorteada['correta']:
-                    print('O jogo acabou!')
-                    jogando = False
-                    break
-                elif resposta not in opcoes:
-                    print('Opção inválida!\nAs opções de resposta são "A", "B", "C", "D", "ajuda", "pula" e "parar"!')
-                    resposta = input('Qual a sua resposta?! ')
-                    if resposta == questao_sorteada['correta']:
-                        dinheiro = valores[a]
-                        print(acertou + str(dinheiro))      
-                        a += 1
-            elif a <= 9:
-                questao_sorteada = sorteia_questao_inedita(questoes,niveis[2],sorteadas)
-                print(questao_para_texto(questao_sorteada,a))
-                sorteadas.append(questao_sorteada)
-                resposta = input('Qual a sua resposta?! ')
-                if resposta == 'pular':
-                    if pulo < 3:
-                        questao_sorteada = sorteia_questao_inedita(questoes,niveis[2],sorteadas)
-                        print(questao_para_texto(questao_sorteada,a))
-                        resposta = input('Qual a sua resposta?! ')
-                        if resposta == questao_sorteada['correta']:
-                            dinheiro = valores[a]    
-                            print(acertou + str(dinheiro))  
-                            a += 1
-                    else:
-                        print('Não deu! Você não tem mais direito a pulos!')
-                        resposta = input('Qual a sua resposta?! ')
-                elif resposta == questao_sorteada['correta']:
-                    dinheiro = valores[a]    
-                    print(acertou + str(dinheiro))  
-                    a += 1
-                elif resposta == 'ajuda':
-                    print(gera_ajuda(questao_sorteada))
-                    resposta = input('Qual a sua resposta?! ')
-                    if resposta == questao_sorteada['correta']:
-                        dinheiro = valores[a] 
-                        print(acertou + str(dinheiro))     
-                        a += 1
-                elif resposta == 'parar' or resposta in opcoes and resposta != questao_sorteada['correta']:
-                    print('O jogo acabou!')
-                    break
-                elif resposta not in opcoes:
-                    print('Opção inválida!\nAs opções de resposta são "A", "B", "C", "D", "ajuda", "pula" e "parar"!')
-                    resposta = input('Qual a sua resposta?! ')
-                    if resposta == questao_sorteada['correta']:
-                        dinheiro = valores[a]   
-                        print(acertou + str(dinheiro))   
-                        a += 1
+    while jogando == True: 
+
         if jogando == False:
+            print('jogo acabou!')
             break
-print(junta_game(banco_questoes))
+
+        while a < len(valores):
+            ajudou_sequencia = False
+            if jogando == False:
+                print('jogo acabou!')
+                break
+
+            if a == 1:
+                print(f'O jogo já vai começar! Lá vem a questão n°{a}!')
+
+            if a == 1 or a == 4 or a == 7:
+                print(f'Vamos começar com questões do nível {niveis[a]}!')
+                questao_sorteada = sorteia_questao_inedita(questoes,niveis[a],sorteadas)
+                print(questao_para_texto(questao_sorteada,a))
+                
+                resposta = input('Qual a sua resposta?! ')
+            
+            else:
+                questao_sorteada = sorteia_questao_inedita(questoes,niveis[a], sorteadas)
+                print(questao_para_texto(questao_sorteada,a))
+               
+                resposta = input('Qual a sua resposta?! ')
+            
+            resp_correta = questao_sorteada['correta']
+
+            
+            while resposta != resp_correta:
+
+                
+                if resposta == 'ajuda':
+                    
+                    if ajudou < 2 and ajudou_sequencia == False:
+                        print(gera_ajuda(questao_sorteada))
+
+                        resposta = input('Qual a sua resposta?!')
+                        ajudou_sequencia = True
+
+                        ajudou += 1
+
+                    else:
+                        print('Não deu!, Você não tem mais direito a ajudas')
+                        resposta = input('Qual a sua resposta?!')
+                
+                elif resposta == 'pular':
+                    ajudou_sequencia = False
+                    
+                    if pulou < 3:
+                        questao_sorteada = sorteia_questao_inedita(questoes,niveis[a],sorteadas)
+                        print(questao_para_texto(questao_sorteada,a))
+                        
+                        resposta = input('Qual a sua resposta?! ')
+                    
+                        pulou += 1
+
+                    else:
+                        print('Não deu!, Você não tem mais direito a pulos')
+                        resposta = input('Qual a sua resposta?! ')
+                
+                elif resposta not in opcoes:
+                    ajudou_sequencia == False
+                    print('Opção inválida!\nAs opções de resposta são "A", "B", "C", "D", "ajuda", "pula" e "parar"!')
+                    resposta = input('Qual a sua resposta?! ')
+            
+                elif resposta != resp_correta or resposta == 'sair':
+                    ajudou_sequencia = False
+                    
+                    jogando = False
+                    break
+        
+        
+            if resposta == resp_correta:
+                ajudou_sequencia = False
+                dinheiro = valores[a]
+                
+                resposta = input('parar ou continuar?')
+
+                if resposta == 'parar':
+                    jogando = False
+
+                print(acertou + str(dinheiro))
+                
+                a += 1
+            
+            if dinheiro == 1000000:
+                print('Parabéns pateta')
+
+        
+(junta_game(banco_questoes))
 
 
 
