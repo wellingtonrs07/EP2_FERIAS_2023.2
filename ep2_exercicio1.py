@@ -1,3 +1,4 @@
+
 #QUESTAO 1
 
 def transforma_base(lista_questoes):
@@ -248,4 +249,14 @@ def gera_ajuda(questao):
         y = rd.choice(l)  # Escolhe outra opção errada da lista 'l'
         return f"DICA:\nOpções certamente erradas: {x} | {y}"
 
+def junta_game(questoes):
+  dinheiro_inicial = 1000
+  nome_jogador = input('Informe seu nome:')
+
+  jogando = True
+
+  while jogando == True:
+    print('O jogo já vai começar! Lá vem a primeira questão!')                           
+                                                                                
+    print('Vamos começar com questões do nível {nivel}!') 
 
