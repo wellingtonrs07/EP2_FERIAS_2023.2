@@ -171,114 +171,81 @@ def sorteia_questao(questoes, nivel):
 
     return questao_sorteada
 
-questoes = {
-  "facil": [
-    {
-      "titulo": "Qual o resultado da operação 57 + 32?",
-      "nivel": "facil",
-      "opcoes": {
-        "A": "-19",
-        "B": "85",
-        "C": "89",
-        "D": "99"
-      },
-      "correta": "C"
-    },
-    {
-      "titulo": "Qual destes parques não se localiza em São Paulo?!",
-      "nivel": "facil",
-      "opcoes": {
-        "A": "Ibirapuera",
-        "B": "Parque do Carmo",
-        "C": "Parque Villa Lobos",
-        "D": "Morro da Urca"
-      },
-      "correta": "D"
-    },
-    {
-      "titulo": "Qual destas não é uma linguagem de programação?",
-      "nivel": "facil",
-      "opcoes": {
-        "A": "Miratdes",
-        "B": "Python",
-        "C": "Lua",
-        "D": "C++"
-      },
-      "correta": "A"
-    },
-    {
-      "titulo": "Dentre os listados, qual destes esportes é menos praticado no Brasil?",
-      "nivel": "facil",
-      "opcoes": {
-        "A": "Natação",
-        "B": "Vôlei",
-        "C": "Ski Cross Country",
-        "D": "Natação"
-      },
-      "correta": "C"
-    }
-  ],
-  "medio": [
-    {
-      "titulo": "Qual destes números é primo?",
-      "nivel": "medio",
-      "opcoes": {
-        "A": "259",
-        "B": "85",
-        "C": "49",
-        "D": "19"
-      },
-      "correta": "D"
-    },
-    {
-      "titulo": "Na Conjectura de _______, escolhendo-se um número natural inicial n, onde n > 0, os seguintes critérios serão obedecidos: Se n for par o seu sucessor será a metade e se n for ímpar o seu sucessor será o triplo mais um, gerando então um novo número. Qual o nome da conjectura?",
-      "nivel": "medio",
-      "opcoes": {
-        "A": "Collatz",
-        "B": "Goldbach",
-        "C": "Poincaré",
-        "D": "Hodge"
-      },
-      "correta": "A"
-    },
-    {
-      "titulo": "Qual a segunda pessoa mais seguida no Instagram?",
-      "nivel": "medio",
-      "opcoes": {
-        "A": "Cristiano Ronaldo",
-        "B": "Dwayne Johnson",
-        "C": "Kim Kardashian",
-        "D": "Kylie Jenner"
-      },
-      "correta": "D"
-    }
-  ],
-  "dificil": [
-    {
-      "titulo": "A reprodução dos seres vivos é um processo biológico através do qual os organismos geram descendência. Qual desta não é uma forma de reprodução assexuada?",
-      "nivel": "dificil",
-      "opcoes": {
-        "A": "Autogamia",
-        "B": "Esporulação",
-        "C": "Partenogênese",
-        "D": "Divisão binária"
-      },
-      "correta": "A"
-    },
-    {
-      "titulo": "Qual o resultado da operação 5 + 2 * 3 ^ 2, onde ^ representa potenciação?",
-      "nivel": "dificil",
-      "opcoes": {
-        "A": "441",
-        "B": "86",
-        "C": "Nenhuma das outras respostas",
-        "D": "23"
-      },
-      "correta": "D"
-    }
-  ]
+#QUESTÃO 5
+import random as rd
+def sorteia_questao_inedita(questoes,nivel,sorteadas):
+    novas_sorteadas = sorteadas   # Faz uma cópia da lista 'sorteadas'
+    lista_nivel = []
+    # Percorre as questões do nível especificado (nivel) no dicionário 'questoes'
+    for dif, questao in questoes.items():
+        if dif == nivel:
+            for elemento in questao:
+                lista_nivel.append(elemento) # Adiciona as questões do nível à lista 'lista_nivel'
+    sorteada = rd.choice(lista_nivel)  # Escolhe aleatoriamente uma questão do nível da lista 'lista_nivel'
+    if sorteada not in novas_sorteadas:  # Verifica se a questão sorteada não está na lista de questões já sorteadas
+        novas_sorteadas.append(sorteada)  # Se não estiver, adiciona a questão sorteada à lista de questões sorteadas
+    return sorteada # Retorna a questão sorteada (ou None se todas as questões já foram sorteadas anteriormente)
+
+#Questao 6
+questao = {
+  "titulo": 'Qual o resultado da operação 57 + 32?',
+  "nivel": "facil",
+  "opcoes": {
+    "A": "-19",
+    "B": "85",
+    "C": "89",
+    "D": "99"
+  },
+  "correta": "D"
 }
+id = 17
+def questao_para_texto(questao, id):
+    # Montar a string formatada da questão
+    final = f"----------------------------------------\nQUESTAO {id}\n\n{questao['titulo']}\n\nRESPOSTAS:\n"
+    
+    # Obter a lista de opções e a opção correta
+    opcoes = questao['opcoes']
+    # Adicionar as opções formatadas à string
+    for letra, opcao in opcoes.items():
+        final += f"{letra}: {opcao}\n"
+    # Retornar a string formatada
+    return final
 
-nivel = 'facil'
+print(questao_para_texto(questao,id))
 
-print(sorteia_questao(questoes, nivel))
+#Questao 7
+import random as rd
+questao = {
+  "titulo": "Qual destes parques não se localiza em São Paulo?!",
+  "nivel": "facil",
+  "opcoes": {
+    "A": "Ibirapuera",
+    "B": "Parque do Carmo",
+    "C": "Parque Villa Lobos",
+    "D": "Morro da Urca"
+  },
+  "correta": "D"
+}
+import random as rd
+
+def gera_ajuda(questao):
+    l = []
+    opcoes = questao['opcoes']
+
+    # Percorre todas as opções do dicionário 'opcoes'
+    for k, v in opcoes.items():
+        if k != questao['correta']:
+            l.append(v)  # Adiciona as opções erradas à lista 'l'
+
+    qtd = rd.randint(1, 2)  # Gera um número aleatório entre 1 e 2
+
+    if qtd == 1:
+        x = rd.choice(l)  # Escolhe aleatoriamente uma opção errada da lista 'l'
+        return f"DICA:\nOpções certamente erradas: {x}"
+    elif qtd == 2:
+        x = rd.choice(l)  # Escolhe aleatoriamente uma opção errada da lista 'l'
+        l.remove(x)  # Remove a opção escolhida para não ser selecionada novamente
+        y = rd.choice(l)  # Escolhe outra opção errada da lista 'l'
+        return f"DICA:\nOpções certamente erradas: {x} | {y}"
+
+
