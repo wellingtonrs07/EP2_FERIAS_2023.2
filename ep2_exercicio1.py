@@ -407,10 +407,12 @@ def gera_ajuda(questao):
         y = rd.choice(l)  # Escolhe outra opção errada da lista 'l'
         return f"DICA:\nOpções certamente erradas: {x} | {y}"
 
+from colorama import Fore
+
 def junta_game(banco_questoes):
     dinheiro = 1000
 
-    nome_jogador = input('Informe seu nome:')
+    nome_jogador = input(Fore.BLUE + 'Informe seu nome:')
     questoes_validadas = valida_questoes(banco_questoes)
     for erros in questoes_validadas:
         if len(erros) > 0:
@@ -507,11 +509,6 @@ def junta_game(banco_questoes):
             if resposta == resp_correta:
                 ajudou_sequencia = False
                 dinheiro = valores[a]
-                
-                resposta = input('parar ou continuar?')
-
-                if resposta == 'parar':
-                    jogando = False
 
                 print(acertou + str(dinheiro))
                 
