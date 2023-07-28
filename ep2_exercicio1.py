@@ -439,6 +439,7 @@ def junta_game(banco_questoes):
 
         while a < len(valores):
             ajudou_sequencia = False
+            pulou_sequencia = False
             if jogando == False:
                 print('jogo acabou!')
                 break
@@ -468,7 +469,8 @@ def junta_game(banco_questoes):
 
                 
                 if resposta == 'ajuda'.upper():
-                    
+                    pulou_sequencia = False
+
                     if ajudou < 2 and ajudou_sequencia == False:
                         print(gera_ajuda(questao_sorteada))
 
@@ -482,14 +484,15 @@ def junta_game(banco_questoes):
                         resposta = input('Qual a sua resposta?!').upper()
                 
                 elif resposta == 'pula'.upper():
+                    
                     ajudou_sequencia = False
                     
-                    if pulou < 3:
+                    if pulou < 3 and pulou_sequencia == False:
                         questao_sorteada = sorteia_questao_inedita(questoes,niveis[a],sorteadas)
                         resp_correta = questao_sorteada['correta']
                         sorteadas.append(questao_sorteada)
                         print(questao_para_texto(questao_sorteada,a))
-                        
+                        pulou_sequencia = True
                         resposta = input('Qual a sua resposta?! ').upper()
                     
                         pulou += 1
@@ -500,11 +503,13 @@ def junta_game(banco_questoes):
                 
                 elif resposta not in opcoes:
                     ajudou_sequencia == False
+                    pulou_sequencia = False
                     print('Opção inválida!\nAs opções de resposta são "A", "B", "C", "D", "ajuda", "pula" e "parar"!')
                     resposta = input('Qual a sua resposta?! ').upper()
             
                 elif resposta != resp_correta or resposta == 'sair':
                     ajudou_sequencia = False
+                    pulou_sequencia = False
                     
                     jogando = False
                     break
@@ -512,13 +517,14 @@ def junta_game(banco_questoes):
         
             if resposta == resp_correta:
                 ajudou_sequencia = False
+                pulou_sequencia = False
                 dinheiro = valores[a]
 
                 print(acertou + str(dinheiro))
                 a += 1
             
             if dinheiro == 1000000:
-                print('Parabéns pateta')
+                print('Parabéns você venceu')
 
         
 (junta_game(banco_questoes))
