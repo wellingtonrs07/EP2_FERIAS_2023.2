@@ -1,4 +1,14 @@
-banco_questoes = [{'titulo': 'Qual o resultado da operação 57 + 32?',
+banco_questoes = [{'titulo': 'Qual o maior freguês do Corinthians?',
+          'nivel': 'facil',
+          'opcoes': {'A': 'São Paulo', 'B': 'Real Madrid', 'C': 'Chelsea', 'D': 'Bayern'}, #nossa pergunta
+          'correta': 'A'},
+        
+        {'titulo': 'Em que ano o Palmeiras ganhou o mundial?',
+          'nivel': 'facil',
+          'opcoes': {'A': 'Só Deus sabe', 'B': '1951', 'C': '1953', 'D': '1955'}, #nossa pergunta
+          'correta': 'A'},
+        
+        {'titulo': 'Qual o resultado da operação 57 + 32?',
           'nivel': 'facil',
           'opcoes': {'A': '-19', 'B': '85', 'C': '89', 'D': '99'},
           'correta': 'C'},
@@ -434,7 +444,7 @@ def junta_game(banco_questoes):
     while jogando == True: 
 
         if jogando == False:
-            print('jogo acabou!')
+            print(Fore.RED + 'jogo acabou!')
             break
 
         while a < len(valores):
@@ -524,7 +534,15 @@ def junta_game(banco_questoes):
                 a += 1
             
             if dinheiro == 1000000:
-                print('Parabéns você venceu')
+                print(Fore.GREEN + 'Parabéns você venceu')
+                continua = input(Fore.CYAN + 'deseja continuar jogando?')
+                if continua == 'S':
+                    jogando == True
+                    dinheiro = 0
+                
+                elif continua == 'N':
+                    break
+                    
 
         
 (junta_game(banco_questoes))
