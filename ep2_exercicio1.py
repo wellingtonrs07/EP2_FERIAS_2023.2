@@ -449,15 +449,17 @@ def junta_game(banco_questoes):
             if a == 1 or a == 4 or a == 7:
                 print(f'Vamos começar com questões do nível {niveis[a]}!')
                 questao_sorteada = sorteia_questao_inedita(questoes,niveis[a],sorteadas)
+                sorteadas.append(questao_sorteada)
                 print(questao_para_texto(questao_sorteada,a))
                 
-                resposta = input('Qual a sua resposta?! ')
+                resposta = input('Qual a sua resposta?! ').upper()
             
             else:
                 questao_sorteada = sorteia_questao_inedita(questoes,niveis[a], sorteadas)
+                sorteadas.append(questao_sorteada)
                 print(questao_para_texto(questao_sorteada,a))
                
-                resposta = input('Qual a sua resposta?! ')
+                resposta = input('Qual a sua resposta?! ').upper()
             
             resp_correta = questao_sorteada['correta']
 
@@ -465,39 +467,41 @@ def junta_game(banco_questoes):
             while resposta != resp_correta:
 
                 
-                if resposta == 'ajuda':
+                if resposta == 'ajuda'.upper():
                     
                     if ajudou < 2 and ajudou_sequencia == False:
                         print(gera_ajuda(questao_sorteada))
 
-                        resposta = input('Qual a sua resposta?!')
+                        resposta = input('Qual a sua resposta?!').upper()
                         ajudou_sequencia = True
 
                         ajudou += 1
 
                     else:
                         print('Não deu!, Você não tem mais direito a ajudas')
-                        resposta = input('Qual a sua resposta?!')
+                        resposta = input('Qual a sua resposta?!').upper()
                 
-                elif resposta == 'pular':
+                elif resposta == 'pula'.upper():
                     ajudou_sequencia = False
                     
                     if pulou < 3:
                         questao_sorteada = sorteia_questao_inedita(questoes,niveis[a],sorteadas)
+                        resp_correta = questao_sorteada['correta']
+                        sorteadas.append(questao_sorteada)
                         print(questao_para_texto(questao_sorteada,a))
                         
-                        resposta = input('Qual a sua resposta?! ')
+                        resposta = input('Qual a sua resposta?! ').upper()
                     
                         pulou += 1
 
                     else:
                         print('Não deu!, Você não tem mais direito a pulos')
-                        resposta = input('Qual a sua resposta?! ')
+                        resposta = input('Qual a sua resposta?! ').upper()
                 
                 elif resposta not in opcoes:
                     ajudou_sequencia == False
                     print('Opção inválida!\nAs opções de resposta são "A", "B", "C", "D", "ajuda", "pula" e "parar"!')
-                    resposta = input('Qual a sua resposta?! ')
+                    resposta = input('Qual a sua resposta?! ').upper()
             
                 elif resposta != resp_correta or resposta == 'sair':
                     ajudou_sequencia = False
@@ -511,7 +515,6 @@ def junta_game(banco_questoes):
                 dinheiro = valores[a]
 
                 print(acertou + str(dinheiro))
-                
                 a += 1
             
             if dinheiro == 1000000:
