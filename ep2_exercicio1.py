@@ -441,7 +441,7 @@ def junta_game(banco_questoes):
             ajudou_sequencia = False
             pulou_sequencia = False
             if jogando == False:
-                print('jogo acabou!')
+                print(Fore.RED + 'jogo acabou!')
                 break
 
             if a == 1:
@@ -520,7 +520,7 @@ def junta_game(banco_questoes):
                 pulou_sequencia = False
                 dinheiro = valores[a]
 
-                print(acertou + str(dinheiro))
+                print(Fore.GREEN + acertou + str(dinheiro))
                 a += 1
             
             if dinheiro == 1000000:
